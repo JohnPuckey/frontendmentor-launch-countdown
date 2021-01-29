@@ -20,9 +20,45 @@
     <h1>We're launching soon</h1>
 
     <div class="flip-clock-container">
-      <div class="flip-clock" id="flip-clock-days"></div>
-      <div class="flip-clock" id="flip-clock-hours"></div>
-      <div class="flip-clock" id="flip-clock-minutes"></div>
+      <div class="flip-clock" id="flip-clock-days">
+        <div class="digits" data-digits-before="00" data-digits-after="11">
+          <!-- Before -->
+          <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card-face card-face-front">00</div>
+            <div class="card-face card-face-back">11</div>
+
+          </div>
+
+          <!-- after -->
+        </div>
+      </div>
+
+      <div class="flip-clock" id="flip-clock-hours">
+        <div class="digits" data-digits-before="00" data-digits-after="11">
+          <!-- Before -->
+          <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card-face card-face-front">00</div>
+            <div class="card-face card-face-back">11</div>
+
+          </div>
+
+          <!-- after -->
+        </div>
+      </div>
+
+      <div class="flip-clock" id="flip-clock-minutes">
+        <div class="digits" data-digits-before="00" data-digits-after="11">
+          <!-- Before -->
+          <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card-face card-face-front">00</div>
+            <div class="card-face card-face-back">11</div>
+
+          </div>
+
+          <!-- after -->
+        </div>
+      </div>
+
       <div class="flip-clock" id="flip-clock-seconds">
         <div class="digits" data-digits-before="00" data-digits-after="11">
           <!-- Before -->
@@ -35,7 +71,9 @@
           <!-- after -->
         </div>
       </div>
+
     </div>
+
     <div class="caption">
       <p>Days</p>
       <p>Hours</p>
@@ -43,12 +81,8 @@
       <p>Seconds</p>
     </div>
 
-
-
-
-
-    
   </div>
+  
 <footer>
 
 </footer>
@@ -57,5 +91,7 @@
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
   </div>
+
+  <script src="./js/script.js"></script>
 </body>
 </html>

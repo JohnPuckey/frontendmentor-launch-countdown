@@ -6,6 +6,8 @@
     /* colors */
     --primary-color-1: hsl(237, 18%, 59%);
     --primary-color-2: hsl(345, 95%, 68%);
+    --primary-color-3: hsl(345, 70%, 62%);
+
     --white: hsl(0, 0%, 100%);
     --neutral-color-1: hsl(236, 21%, 26%);
     --neutral-color-2: hsl(235, 16%, 14%);
@@ -21,6 +23,7 @@
 *::before,
 *::after {
     box-sizing: inherit;
+    
 }
 
 body {
@@ -30,8 +33,7 @@ body {
     height: 100vh;
     background-color: var(--neutral-color-3);
     background-image: url(/images/bg-stars.svg), linear-gradient(var(--neutral-color-3), var(--neutral-color-2));;
-    background-size: cover ;
-
+    background-size: cover;
     display: flex;
     flex-direction: column;
 }
@@ -65,6 +67,9 @@ body {
 .flip-clock {
     display: flex;
     perspective: 1000px;
+    border-radius: 6px;
+    background-color: rgba(0,0,0,.2);
+    box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.2) ;
 }
 
 .digits {
@@ -75,7 +80,6 @@ body {
 
 .digits:before, .digits:after {
     position: absolute;
-
     display: flex;
     justify-content: center;
     width: 100%;
@@ -131,22 +135,30 @@ body {
 .card-face-front {
     align-items: flex-end;
 
-    background-color: red;
-    color: white;
 }
 
 .card-face-back {
     align-items: flex-start;
-
-    background-color: blue;
-    color: white;
-
     transform: rotateX(-180deg);
 }
 
+.digits::before, .card-face-back, .digits::after, .card-face-front {
+    background: var(--neutral-color-1);
+    color: var(--primary-color-2);
+    border-radius: 6px;
+}
+
+.digits::after,
+.card-face-front {
+    color: var(--primary-color-3);
+    box-shadow: 0px 40px 0px 10px rgba(0,0,0, .2) inset;
+    
+}
+
 .caption {
-    margin-top: 10px;
+    margin-top: 18px;
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(4, 70px) ;
     gap: 15px;
 }
