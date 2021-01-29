@@ -18,6 +18,11 @@
     padding: 0;
 }
 
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
 body {
     font-family: 'Red Hat Text', sans-serif;
     font-size: 14px;
@@ -25,6 +30,7 @@ body {
     height: 100vh;
     background-color: var(--neutral-color-3);
     background-image: url(/images/bg-stars.svg), linear-gradient(var(--neutral-color-3), var(--neutral-color-2));;
+    background-size: cover ;
 
     display: flex;
     flex-direction: column;
@@ -50,12 +56,92 @@ body {
 .flip-clock-container {
     display: flex;
     gap: 15px;
+
+    font-size: 40px;
+    line-height: 0;
+ 
 }
 
 .flip-clock {
+    display: flex;
+    perspective: 1000px;
+}
+
+.digits {
+    position: relative;
     width: 70px;
     height: 70px;
+}
+
+.digits:before, .digits:after {
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+}
+
+.digits:before {
+    content: attr(data-digits-before);
+    bottom: 0;
+    align-items: flex-start;
+}
+
+.digits:after {
+    content: attr(data-digits-after);
+    top: 0;
+    align-items: flex-end;
+}
+
+.card {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    height: 50%;
+
+    transform-style: preserve-3d;
+    transform-origin: bottom;
+    transform: rotateX(0);
+
+    transition: transform .7s ease-in-out ;
+
+}
+
+.card.flipped {
+    transform: rotateX(180deg);
+
+}
+
+.card-face {
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    backface-visibility: hidden;
+}
+
+.card-face-front {
+    align-items: flex-end;
+
+    background-color: red;
+    color: white;
+}
+
+.card-face-back {
+    align-items: flex-start;
+
     background-color: blue;
+    color: white;
+
+    transform: rotateX(-180deg);
 }
 
 .caption {
@@ -72,6 +158,8 @@ body {
     letter-spacing: 3px;
     color: var(--primary-color-1);
 }
+
+/* footer section */
 
 footer {
     margin-top: auto;

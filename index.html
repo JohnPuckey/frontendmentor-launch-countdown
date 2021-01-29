@@ -24,7 +24,16 @@
       <div class="flip-clock" id="flip-clock-hours"></div>
       <div class="flip-clock" id="flip-clock-minutes"></div>
       <div class="flip-clock" id="flip-clock-seconds">
-        
+        <div class="digits" data-digits-before="00" data-digits-after="11">
+          <!-- Before -->
+          <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card-face card-face-front">00</div>
+            <div class="card-face card-face-back">11</div>
+
+          </div>
+
+          <!-- after -->
+        </div>
       </div>
     </div>
     <div class="caption">
