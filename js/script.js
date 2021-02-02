@@ -1,24 +1,89 @@
-// set 14 day countdown
+
+// // for demo purposes add 14 days onto current date
+const deadline = new Date(Date.now() + 12096e5);
+
+console.log(deadline)
+
+// initialize DOM elements
+
+const els = {
+    s: initElements('s'),
+    m: initElements('m'),
+    h: initElements('h'),
+    d: initElements('d')
+}
+
+function initElements(type) {
+    const els = [{}];
+    if (!['s', 'm', 'h', 'd'].includes(type)) return els;
+
+    const target = document.getElementById(`flip-clock-${type}`);
+
+    if (!target) return els;
+
+    let el;
+
+    el = els;
+    el.digit = target.querySelector('.digits');
+    el.card = el.digit.querySelector('.card');
+    el.cardFaces = el.card.querySelectorAll('.card-face')
+    el.cardFaceA = el.cardFaces[0];
+    el.cardFaceB = el.cardFaces[1];
+
+    return els;
+
+}
 
 
-// for demo purposes add 14 days onto current date
-let countDownDate = new Date(Date.now() + 12096e5).getTime();
+// calculate time remaining
 
-console.log(countDownDate);
+function getTimeRemaining(endtime) {
+    const total = Date.parse(endtime) - Date.parse(new Date())
+    const s = Math.floor( (total / 1000) % 60);
+    const m = Math.floor( (total/1000/60) % 60);
+    const h = Math.floor((total/(1000*60*60)) % 24);
+    const d = Math.floor( total/(1000*60*60*24) );
 
-let x = setInterval(() => {
-    // get todays date and time
-    let now = new Date().getTime();
+    return {
+        total,
+        d,
+        h,
+        m,
+        s
+    };
+}
 
-    // find distance between now and countDownDate
-    let distance = countDownDate - now;
+function initilizeClock(endtime) {
+    function updateClock(){
+        const time = getTimeRemaining(endtime);
+            // console.log(time.d + ':' + time.h + ':' + time.m + ':' + time.s)
 
-    // calculate days, hours, minutes, seconds
-    let days = Math.floor(distance / (1000 * 60 * 60 * 24)); 
-    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / (1000));
+        // output results to page
+        showTime(els.s, time.s)
+        showTime(els.m, time.m)
+        showTime(els.h, time.h)
+        showTime(els.d, time.d)
 
-    console.log(days + ":" + hours + ":" + minutes + ":" + seconds )
+        
 
-}, 1000);
+        if (time.total <= 0) {
+          clearInterval(timeinterval);
+        }
+      }
+      
+      updateClock(); // run function once at first to avoid delay
+      var timeinterval = setInterval(updateClock,1000);
+}
+
+initilizeClock(deadline);
+
+function showTime(el, time) {
+
+    let curr = time
+
+    el.digit.dataset.digitBefore = curr;
+    el.cardFaceA.textContent = el.digit.dataset.digitBefore;
+    el.digit.dataset.digitAfter = curr;
+    el.cardFaceB.textContent = el.digit.dataset.digitAfter;
+    el.card.classList.add('flipped')
+}

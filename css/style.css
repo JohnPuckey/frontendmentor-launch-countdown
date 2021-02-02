@@ -88,13 +88,13 @@ body {
 }
 
 .digits:before {
-    content: attr(data-digits-before);
+    content: attr(data-digit-before);
     bottom: 0;
     align-items: flex-start;
 }
 
 .digits:after {
-    content: attr(data-digits-after);
+    content: attr(data-digit-after);
     top: 0;
     align-items: flex-end;
 }
@@ -180,4 +180,8 @@ footer {
     background: url(/images/pattern-hills.svg);
     background-size: cover ;
     background-position: 25%;
+}
+
+.test {
+    background-color: teal;
 }
