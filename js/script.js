@@ -2,6 +2,9 @@
 // // for demo purposes add 14 days onto current date
 const deadline = new Date(Date.now() + 12096e5);
 
+let previous = '1';
+
+
 console.log(deadline)
 
 // initialize DOM elements
@@ -31,7 +34,6 @@ function initElements(type) {
     el.cardFaceB = el.cardFaces[1];
 
     return els;
-
 }
 
 
@@ -60,19 +62,17 @@ function initilizeClock(endtime) {
 
         // output results to page
         showTime(els.s, time.s)
-        showTime(els.m, time.m)
-        showTime(els.h, time.h)
-        showTime(els.d, time.d)
-
-        
-
+        // showTime(els.m, time.m)
+        // showTime(els.h, time.h)
+        // showTime(els.d, time.d)
+ 
         if (time.total <= 0) {
           clearInterval(timeinterval);
         }
       }
       
       updateClock(); // run function once at first to avoid delay
-      var timeinterval = setInterval(updateClock,1000);
+      var timeinterval = setInterval(updateClock,500);
 }
 
 initilizeClock(deadline);
@@ -81,9 +81,32 @@ function showTime(el, time) {
 
     let curr = time
 
-    el.digit.dataset.digitBefore = curr;
+    if (curr !== previous) {
+
+        updateSideB(el, curr)
+        animateFlip(el);
+        previous = curr;
+
+        console.log('different')
+    } else if (curr === previous) {
+        updateSideA(el, previous)
+        el.card.classList.remove('flipped')
+        console.log('same')
+    }
+    
+}
+
+function updateSideA(el, previous) {
+    el.digit.dataset.digitBefore = previous;
     el.cardFaceA.textContent = el.digit.dataset.digitBefore;
+}
+
+
+function updateSideB(el, curr) {
     el.digit.dataset.digitAfter = curr;
     el.cardFaceB.textContent = el.digit.dataset.digitAfter;
+}
+
+function animateFlip(el) {
     el.card.classList.add('flipped')
 }
